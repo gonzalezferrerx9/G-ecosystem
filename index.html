@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Prueba de Prompt API</title>
+  
+  <meta http-equiv="origin-trial" 
+        content="TU_TOKEN_AQUÍ">
+
+</head>
+<body>
+  <h1>Prueba de Google Chrome Built-in AI (Prompt API)</h1>
+  <p>Presiona F12 para ver el resultado de la IA.</p>
+
+  <script type="module">
+    async function runAITest() {
+      
+      // Verificación
+      if (typeof LanguageModel === 'undefined') {
+        console.error('Error: La API (LanguageModel) no está disponible.');
+        console.log('Asegúrate de estar usando Google Chrome (versión 139+), que tu token sea correcto y esté bien pegado.');
+        return;
+      }
+
+      console.log('¡La API de Origin Trial está activa!');
+
+      try {
+        // 1. Crear sesión
+        const session = await LanguageModel.create();
+        
+        // 2. Insertar prompt
+        const prompt = "Escribe un eslogan corto y pegadizo para un hackathon sobre IA en el navegador.";
+        console.log(`Enviando prompt al modelo: "${prompt}"`);
+
+        // 3. Enviar prompt
+        const result = await session.prompt(prompt);
+        
+        // 4. Muestra la respuesta en la consola
+        console.log("Respuesta de la IA:", result);
+
+      } catch (error) {
+        // Capturar cualquier error 
+        console.error("Error al ejecutar el prompt de IA:", error);
+      }
+    }
+
+    // Llamar a la función de prueba
+    runAITest();
+  </script>
+</body>
+</html>

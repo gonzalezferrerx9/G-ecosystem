@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Prueba de Prompt API</title>
-  
+
   <meta http-equiv="origin-trial" 
         content="As9ZSg8q3tvmuFXlLNjksxCxgvhd6pHwp2Ygp1HsWWiByTuGwEMpzO767/pg8unGrBrUmzCqilacpp13kDEUTgsAAABueyJvcmlnaW4iOiJodHRwczovL2dvbnphbGV6ZmVycmVyeDkuZ2l0aHViLmlvOjQ0MyIsImZlYXR1cmUiOiJBSVByb21wdEFQSU11bHRpbW9kYWxJbnB1dCIsImV4cGlyeSI6MTc3NDMxMDQwMH0=">
 
@@ -11,6 +11,8 @@
 <body>
   <h1>Prueba de Google Chrome Built-in AI (Prompt API)</h1>
   <p>Presiona F12 para ver el resultado de la IA.</p>
+
+  <button id="testButton">Probar IA</button>
 
   <script type="module">
     async function runAITest() {
@@ -26,7 +28,9 @@
 
       try {
         // 1. Crear sesión
-        const session = await LanguageModel.create();
+        const session = await LanguageModel.create({
+            expectedOutputs: [{ type: "text", languages: ["es"] }]
+        });
         
         // 2. Insertar prompt
         const prompt = "Escribe un eslogan corto y pegadizo para un hackathon sobre IA en el navegador.";
@@ -44,8 +48,11 @@
       }
     }
 
-    // Llamar a la función de prueba
-    runAITest();
+    // Llamar a la funcion de prueba.
+    document.getElementById('testButton').addEventListener('click', () => {
+      console.log('Botón presionado, ejecutando prueba de IA...');
+      runAITest();
+    });
   </script>
 </body>
 </html>
